@@ -1,10 +1,11 @@
-import './App.css';
+import './styleSheets/App.css';
 import Header from "./Header.js";
 import Topic_list from "./Topic_list";
-import {useStateValue} from './StateProvider';
 import Login from './Login';
+
 function App() {
-  const [{user}, dispatch]=useStateValue();
+  
+  const user = sessionStorage.getItem('userId');
   return (
     <div className="App">
       <>

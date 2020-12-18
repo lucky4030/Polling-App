@@ -1,26 +1,19 @@
 import React,{useState} from 'react'
-import "./login.css"
+import "./styleSheets/login.css"
 import {Button }from "@material-ui/core"
 import { auth, provider } from './Firebase'
-import { useStateValue } from './StateProvider'
-import { actionTypes } from './Reducer'
 
 function Login() {
-  const[state, dispatch]= useStateValue();
+
     const SignIn = () =>{
         auth
         .signInWithPopup(provider)
         .then(result =>{          /* promises.then for positive outcome */
-            console.log(result)
-            var token = result.credential.accessToken;
-            // console.log("The email  is");
-            // console.log(result.user.email);
-            
-            dispatch({
-                type:actionTypes.SET_USER,
-                user:result.user
-
-            })
+            // console.log(result)
+            sessionStorage.setItem('userId' , `${result.user.email}` );
+            sessionStorage.setItem('userName' , `${result.user.displayName}` );
+            sessionStorage.setItem('userPhoto', `${result.user.photoURL}` );
+            sessionStorage.setItem('userPhoneNO', `${result.user.phoneNumber}` );
         }) 
         .catch(error =>{
             alert(error.message);

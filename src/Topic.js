@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import db from './Firebase';
-import firebase from './Firebase'
-import "./topic.css"
+import "./styleSheets/topic.css"
+
 function Topic() {
     const [input,setinput]=useState("");
     const sendMessage=(e)=>{

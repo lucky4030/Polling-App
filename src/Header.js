@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import db from "./Firebase";
-import "./Header.css";
+import "./styleSheets/Header.css";
 import Topic from "./Topic";
 import Topicslist from "./Topic_list";
-import { useStateValue } from "./StateProvider";
+
+const user = sessionStorage.getItem('userId');
 
 const Judge = (props) => {
-    const [{ user }, dispatch] = useStateValue();
-     if (props.topic.users_list.includes(user.email) === false) {
+    
+     if (props.topic.users_list.includes(user) === false) {
     return(
       <Topicslist
         topicc={props.topic.poll}
@@ -27,8 +28,10 @@ const Judge = (props) => {
 
 function Header() {
   const [topicslist, settopicslist] = useState([]);
-  const [{ user }, dispatch] = useStateValue();
 
+  // console.log(sessionStorage.getItem('userName'));
+  // console.log(sessionStorage.getItem('userId'));
+  // console.log(sessionStorage.getItem('userPhoto'));
   useEffect(() => {
     db.collection("polls_list").onSnapshot((snapshot) => {
       settopicslist(
